@@ -1,0 +1,26 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.main-content {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.mat-toolbar {
+  background-color: #1976d2;
+  color: white;
+}
+
+.mat-sidenav {
+  width: 200px;
+}
+
+.mat-sidenav-container {
+  height: calc(100% - 64px);
+}

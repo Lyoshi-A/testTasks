@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Task</span>
+    <span class="spacer"></span>
+    <button *ngIf="isLoggedIn()" mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <span mat-menu-item >User Area</span>
+      <button mat-menu-item (click)="onLogout()">Logout</button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>

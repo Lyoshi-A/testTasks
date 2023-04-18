@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>{{ isNew ? 'Add Task' : 'Edit Task' }}</h2>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" maxlength="15" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description" maxlength="50" required>
+    </mat-form-field>
+    <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button color="primary" (click)="onSaveClick()">Save</button>
+</div>

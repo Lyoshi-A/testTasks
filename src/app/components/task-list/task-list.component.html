@@ -1,0 +1,31 @@
+<div class="task-list">
+  <div class="task-header">
+    <h2>Task List</h2>
+    <button mat-raised-button color="primary" (click)="openDialog()">Add Task</button>
+  </div>
+
+  <mat-list>
+    <mat-list-item *ngFor="let task of tasks; let i = index">
+      <div class="task-item" [ngClass]="{'task-completed': task.completed}">
+        <h3 matLine>{{ task.title }}</h3>
+        <p matLine>
+          {{ task.description }}
+        </p>
+        <button *ngIf="!task.completed" mat-icon-button color="primary" matTooltip="Edit" (click)="openDialog(task)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button *ngIf="!task.completed" mat-icon-button color="warn" matTooltip="Delete" (click)="deleteTask(task)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button *ngIf="task.completed" mat-icon-button color="warn" matTooltip="Restore" (click)="restoreTask(task)">
+          <mat-icon>restore</mat-icon>
+        </button>
+      </div>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
+
+  <div class="no-tasks" *ngIf="tasks.length === 0">
+    No tasks found. Click "Add Task" to get started.
+  </div>
+</div>
