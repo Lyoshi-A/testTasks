@@ -4,6 +4,19 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { LoginComponent } from './login-form.component';
 import { AuthService } from '../../services/auth/auth.service';
+import {MatInputModule} from "@angular/material/input";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatListModule} from "@angular/material/list";
+import {MatDividerModule} from "@angular/material/divider";
+import {MatCardModule} from "@angular/material/card";
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -16,7 +29,20 @@ describe('LoginComponent', () => {
       declarations: [ LoginComponent ],
       imports: [
         ReactiveFormsModule,
-        RouterTestingModule
+        RouterTestingModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatDialogModule,
+        MatSnackBarModule,
+        MatToolbarModule,
+        MatMenuModule,
+        MatListModule,
+        MatDividerModule,
+        MatCardModule
       ],
       providers: [
         AuthService

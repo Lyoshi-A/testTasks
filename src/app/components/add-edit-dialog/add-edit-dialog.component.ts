@@ -12,8 +12,8 @@ import { TaskService } from '../../services/task/task.service';
 export class DialogComponent implements OnInit {
 
   form: FormGroup;
-  isNew: string;
-  task: Task;
+  isNew: boolean;
+  task: Task | undefined;
   errorMessage: string;
 
   constructor(

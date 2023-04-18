@@ -9,7 +9,7 @@ COPY package*.json ./
 
 RUN npm install
 
-# add app
+# Copy project files to workdir
 COPY . .
 
 # expose port

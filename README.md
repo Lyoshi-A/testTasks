@@ -22,8 +22,8 @@ To run this app in a Docker container, you need to have Docker installed.
 
 1. Clone this repository.
 2. Navigate to the project directory in your terminal.
-3. Build the Docker image by running `docker build -t angular-app .`.
-4. Run the Docker container by running `docker run -p 4200:4200 angular-app`.
+3. Build the Docker image by running `docker build -t tasks .`.
+4. Run the Docker container by running `docker run -p 4200:4200 tasks`.
 5. Navigate to `http://localhost:4200/` to view the app.
 
 

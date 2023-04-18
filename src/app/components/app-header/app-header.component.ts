@@ -10,7 +10,7 @@ import { AuthService } from '../../services/auth/auth.service';
 export class AppHeaderComponent {
   constructor(
     private authService: AuthService,
-    private router: Router,
+    public router: Router,
   ) {}
 
   onLogout() {

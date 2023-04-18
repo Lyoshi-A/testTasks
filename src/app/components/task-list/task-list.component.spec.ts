@@ -1,10 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { By } from '@angular/platform-browser';
-import { of } from 'rxjs';
+import {BehaviorSubject, of} from 'rxjs';
 import { Task } from 'src/app/models/task.model';
 import { TaskListComponent } from './task-list.component';
 import { TaskService } from '../../services/task/task.service';
+import {MatInputModule} from "@angular/material/input";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatListModule} from "@angular/material/list";
+import {MatDividerModule} from "@angular/material/divider";
+import {MatCardModule} from "@angular/material/card";
 
 describe('TaskListComponent', () => {
   let component: TaskListComponent;
@@ -15,7 +27,21 @@ describe('TaskListComponent', () => {
     mockTaskService = jasmine.createSpyObj('TaskService', ['getTasks', 'addTask', 'updateTask', 'deleteTask', 'restoreTask']);
 
     await TestBed.configureTestingModule({
-      imports: [MatDialogModule],
+      imports: [
+        MatDialogModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSnackBarModule,
+        MatToolbarModule,
+        MatMenuModule,
+        MatListModule,
+        MatDividerModule,
+        MatCardModule
+      ],
       declarations: [ TaskListComponent ],
       providers: [
         { provide: TaskService, useValue: mockTaskService }
@@ -38,7 +64,8 @@ describe('TaskListComponent', () => {
       {id: 1, title: 'Task 1', description: 'Description 1', completed: true, createdAt: new Date('2022-04-18')},
       {id: 2, title: 'Task 2', description: 'Description 2', completed: false, createdAt: new Date('2022-04-19')},
     ];
-    mockTaskService.getTasks.and.returnValue(of(tasks));
+    const tasksSubject = new BehaviorSubject<Task[]>(tasks);
+    mockTaskService.getTasks.and.returnValue(tasksSubject);
     fixture.detectChanges();
     expect(component.tasks).toEqual(tasks);
   });
