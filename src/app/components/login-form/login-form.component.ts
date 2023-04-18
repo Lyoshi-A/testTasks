@@ -28,14 +28,14 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     const login = this.loginForm.value.login;
     const password = this.loginForm.value.password;
-    this.authService.login(login, password).subscribe({
-      next: (isLogged) => {
+    this.authService.login(login, password).subscribe(
+     (isLogged) => {
         // Navigate to task list component
-        if (isLogged) this.router.navigate(['/tasks']);
-      },
-      error: () => {
-        this.errorMessage = 'Invalid login or password';
-      }
+        if (isLogged) {
+          this.router.navigate(['/tasks']);
+        } else {
+          this.errorMessage = 'Invalid login or password';
+        }
     });
   }
 }

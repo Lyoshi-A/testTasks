@@ -17,6 +17,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatListModule} from "@angular/material/list";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatCardModule} from "@angular/material/card";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -29,6 +30,7 @@ describe('LoginComponent', () => {
       declarations: [ LoginComponent ],
       imports: [
         ReactiveFormsModule,
+        BrowserAnimationsModule,
         RouterTestingModule,
         MatInputModule,
         MatFormFieldModule,
@@ -71,6 +73,10 @@ describe('LoginComponent', () => {
   });
 
   it('should navigate to the tasks page if the login succeeds', () => {
+    const login = 'user';
+    const password = 'password';
+    component.loginForm.controls['login'].setValue(login);
+    component.loginForm.controls['password'].setValue(password);
     const navigateSpy = spyOn((component as any).router, 'navigate');
     component.onSubmit();
     expect(navigateSpy).toHaveBeenCalledWith(['/tasks']);
@@ -96,6 +102,7 @@ describe('LoginComponent', () => {
     component.loginForm.controls['login'].setValue('user');
     component.loginForm.controls['password'].setValue('password123');
     const submitButton = fixture.nativeElement.querySelector('button[type="submit"]');
+    fixture.detectChanges();
     expect(submitButton.disabled).toBeFalsy();
   });
 });
