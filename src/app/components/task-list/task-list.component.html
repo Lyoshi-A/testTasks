@@ -1,7 +1,7 @@
 <div class="task-list">
   <div class="task-header">
     <h2>Task List</h2>
-    <button mat-raised-button color="primary" (click)="openDialog()">Add Task</button>
+    <button mat-raised-button color="primary" class="add-button" (click)="openDialog()">Add Task</button>
   </div>
 
   <mat-list>
@@ -11,13 +11,13 @@
         <p matLine>
           {{ task.description }}
         </p>
-        <button *ngIf="!task.completed" mat-icon-button color="primary" matTooltip="Edit" (click)="openDialog(task)">
+        <button *ngIf="!task.completed" mat-icon-button color="primary" class="edit-button" matTooltip="Edit" (click)="openDialog(task)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button *ngIf="!task.completed" mat-icon-button color="warn" matTooltip="Delete" (click)="deleteTask(task)">
+        <button *ngIf="!task.completed" mat-icon-button color="warn" class="delete-button" matTooltip="Delete" (click)="deleteTask(task)">
           <mat-icon>delete</mat-icon>
         </button>
-        <button *ngIf="task.completed" mat-icon-button color="warn" matTooltip="Restore" (click)="restoreTask(task)">
+        <button *ngIf="task.completed" mat-icon-button color="warn" class="restore-button" matTooltip="Restore" (click)="restoreTask(task)">
           <mat-icon>restore</mat-icon>
         </button>
       </div>

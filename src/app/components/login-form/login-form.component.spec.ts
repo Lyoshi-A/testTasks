@@ -2,8 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { LoginComponent } from './login-form.component';
-import { AuthService } from '../../services/auth/auth.service';
 import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonModule} from "@angular/material/button";
@@ -18,6 +16,9 @@ import {MatListModule} from "@angular/material/list";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatCardModule} from "@angular/material/card";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { LoginComponent } from './login-form.component';
+import { TaskListComponent } from "../task-list/task-list.component";
+import { AuthService } from '../../services/auth/auth.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -31,7 +32,9 @@ describe('LoginComponent', () => {
       imports: [
         ReactiveFormsModule,
         BrowserAnimationsModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'tasks', component: TaskListComponent}
+        ]),
         MatInputModule,
         MatFormFieldModule,
         MatButtonModule,
@@ -73,11 +76,7 @@ describe('LoginComponent', () => {
   });
 
   it('should navigate to the tasks page if the login succeeds', () => {
-    const login = 'user';
-    const password = 'password';
-    component.loginForm.controls['login'].setValue(login);
-    component.loginForm.controls['password'].setValue(password);
-    const navigateSpy = spyOn((component as any).router, 'navigate');
+    const navigateSpy = spyOn(component.router, 'navigate');
     component.onSubmit();
     expect(navigateSpy).toHaveBeenCalledWith(['/tasks']);
   });

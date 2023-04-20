@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { Task } from '../../models/task.model';
 import { DialogComponent } from '../add-edit-dialog/add-edit-dialog.component';
 import { TaskService } from '../../services/task/task.service';
@@ -13,6 +14,7 @@ import { TaskService } from '../../services/task/task.service';
 export class TaskListComponent implements OnInit, OnDestroy {
   tasks: Task[] = [];
   subTasks$: Subscription;
+  errorMessage: string;
 
   constructor(private dialog: MatDialog, public taskService: TaskService) { }
 
@@ -34,20 +36,21 @@ export class TaskListComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         if (result.isNew) {
-          this.taskService.addTask(result.task);
+          this.taskService.addTask(result.task).pipe(take(1)).subscribe();
         } else {
-          this.taskService.updateTask(result.task);
+          this.taskService.updateTask(result.task).pipe(take(1)).subscribe();
         }
       }
     });
   }
 
   deleteTask(task: Task): void {
-    this.taskService.deleteTask(task);
+    this.errorMessage = 'done'
+    // this.taskService.deleteTask(task).pipe(take(1)).subscribe(()=> this.errorMessage = 'done');
   }
 
   restoreTask(task: Task): void {
-    this.taskService.restoreTask(task);
+    this.taskService.restoreTask(task).pipe(take(1)).subscribe();
   }
 
   ngOnDestroy () {

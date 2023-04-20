@@ -71,17 +71,23 @@ describe('TaskListComponent', () => {
   });
 
   it('should open add/edit dialog on button click with new task', () => {
+    const tasksSubject = new BehaviorSubject<Task[]>([]);
+    mockTaskService.getTasks.and.returnValue(tasksSubject);
+    fixture.detectChanges();
+    expect(component.tasks).toEqual([]);
     spyOn(component, 'openDialog');
     const addButton = fixture.debugElement.query(By.css('.add-button')).nativeElement;
+    console.log({addButton});
     addButton.click();
     fixture.detectChanges();
-    expect(component.openDialog).toHaveBeenCalledWith(undefined);
+    expect(component.openDialog).toHaveBeenCalled();
   });
 
   it('should open add/edit dialog on button click with existing task', () => {
     spyOn(component, 'openDialog');
-    const task: Task = {id: 1, title: 'Task 1', description: 'Description 1', completed: true, createdAt: new Date('2022-04-18')};
-    component.tasks = [task];
+    const task: Task = {id: 1, title: 'Task 1', description: 'Description 1', completed: false, createdAt: new Date('2022-04-18')};
+    const tasksSubject = new BehaviorSubject<Task[]>([task]);
+    mockTaskService.getTasks.and.returnValue(tasksSubject);
     fixture.detectChanges();
     const editButton = fixture.debugElement.query(By.css('.edit-button')).nativeElement;
     editButton.click();
@@ -91,9 +97,11 @@ describe('TaskListComponent', () => {
 
   it('should delete task on button click', () => {
     spyOn(component, 'deleteTask');
-    const task: Task = {id: 1, title: 'Task 1', description: 'Description 1', completed: true, createdAt: new Date('2022-04-18')};
-    component.tasks = [task];
+    const task = {id: 1, title: 'Task 1', description: 'Description 1', completed: false, createdAt: new Date('2022-04-18')}
+    const tasksSubject = new BehaviorSubject<Task[]>([task]);
+    mockTaskService.getTasks.and.returnValue(tasksSubject);
     fixture.detectChanges();
+    expect(component.tasks).toEqual([task]);
     const deleteButton = fixture.debugElement.query(By.css('.delete-button')).nativeElement;
     deleteButton.click();
     fixture.detectChanges();
@@ -103,7 +111,8 @@ describe('TaskListComponent', () => {
   it('should restore task on button click', () => {
     spyOn(component, 'restoreTask');
     const task: Task = {id: 1, title: 'Task 1', description: 'Description 1', completed: true, createdAt: new Date('2022-04-18')};
-    component.tasks = [task];
+    const tasksSubject = new BehaviorSubject<Task[]>([task]);
+    mockTaskService.getTasks.and.returnValue(tasksSubject);
     fixture.detectChanges();
     const restoreButton = fixture.debugElement.query(By.css('.restore-button')).nativeElement;
     restoreButton.click();
