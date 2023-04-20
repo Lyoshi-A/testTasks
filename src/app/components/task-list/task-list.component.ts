@@ -14,7 +14,6 @@ import { TaskService } from '../../services/task/task.service';
 export class TaskListComponent implements OnInit, OnDestroy {
   tasks: Task[] = [];
   subTasks$: Subscription;
-  errorMessage: string;
 
   constructor(private dialog: MatDialog, public taskService: TaskService) { }
 
@@ -45,8 +44,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
   }
 
   deleteTask(task: Task): void {
-    this.errorMessage = 'done'
-    // this.taskService.deleteTask(task).pipe(take(1)).subscribe(()=> this.errorMessage = 'done');
+    this.taskService.deleteTask(task).pipe(take(1)).subscribe();
   }
 
   restoreTask(task: Task): void {
